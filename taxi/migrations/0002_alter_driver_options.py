@@ -12,6 +12,6 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='driver',
-            options={'verbose_name': 'Driver', 'verbose_name_plural': 'Drivers'},
+            options={'verbose_name': 'driver', 'verbose_name_plural': 'drivers'},
         ),
     ]
