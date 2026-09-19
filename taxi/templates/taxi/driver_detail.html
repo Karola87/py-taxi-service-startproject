@@ -1,0 +1,32 @@
+{% extends "taxi/base.html" %}
+
+{% block title %}Driver details{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Driver details</h2>
+
+    <p><strong>Username:</strong> {{ driver.username }}</p>
+    <p><strong>First name:</strong> {{ driver.first_name }}</p>
+    <p><strong>Last name:</strong> {{ driver.last_name }}</p>
+    <p><strong>License number:</strong> {{ driver.license_number }}</p>
+
+    <h3>Cars driven:</h3>
+    <ul>
+        {% for car in driver.car_set.all %}
+            <li>
+                <a href="{% url 'car-detail' car.id %}">
+                    {{ car.model }} ({{ car.manufacturer.name }})
+                </a>
+            </li>
+        {% empty %}
+            <li>No cars assigned.</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        <a class="btn" href="{% url 'driver-update' driver.id %}">Edit</a>
+        <a class="btn" href="{% url 'driver-delete' driver.id %}">Delete</a>
+    </p>
+</div>
+{% endblock %}
