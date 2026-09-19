@@ -1,32 +1,21 @@
 {% extends "taxi/base.html" %}
 
-{% block title %}Driver details{% endblock %}
-
 {% block content %}
-<div class="card">
-    <h2>Driver details</h2>
+  <h1>{{ driver.username }}</h1>
+  <p>License number: {{ driver.license_number }}</p>
 
-    <p><strong>Username:</strong> {{ driver.username }}</p>
-    <p><strong>First name:</strong> {{ driver.first_name }}</p>
-    <p><strong>Last name:</strong> {{ driver.last_name }}</p>
-    <p><strong>License number:</strong> {{ driver.license_number }}</p>
+  <h2>Cars</h2>
+  <ul>
+    {% for car in driver.cars.all %}
+      <li>
+        <a href="{% url 'taxi:car-detail' car.id %}">{{ car.model }}</a>
+      </li>
+    {% empty %}
+      <li>No cars assigned to this driver.</li>
+    {% endfor %}
+  </ul>
 
-    <h3>Cars driven:</h3>
-    <ul>
-        {% for car in driver.car_set.all %}
-            <li>
-                <a href="{% url 'car-detail' car.id %}">
-                    {{ car.model }} ({{ car.manufacturer.name }})
-                </a>
-            </li>
-        {% empty %}
-            <li>No cars assigned.</li>
-        {% endfor %}
-    </ul>
-
-    <p>
-        <a class="btn" href="{% url 'driver-update' driver.id %}">Edit</a>
-        <a class="btn" href="{% url 'driver-delete' driver.id %}">Delete</a>
-    </p>
-</div>
+  <a href="{% url 'taxi:driver-update' driver.id %}">Edit</a>
+  <a href="{% url 'taxi:driver-delete' driver.id %}">Delete</a>
 {% endblock %}
+

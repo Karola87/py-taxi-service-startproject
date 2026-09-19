@@ -11,11 +11,11 @@ class Manufacturer(models.Model):
 
 
 class Driver(AbstractUser):
-    license_number = models.CharField(max_length=20)
+    license_number = models.CharField(max_length=20, unique=True)
 
     class Meta:
-        verbose_name = "Driver"
-        verbose_name_plural = "Drivers"
+        verbose_name = "driver"
+        verbose_name_plural = "drivers"
 
 
 class Car(models.Model):
